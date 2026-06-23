@@ -1,0 +1,6 @@
+{
+  "name": "StratSearch Foundation",
+  "description": "A modern, scholarly static website for StratSearch Foundation, Inc. (SSFI), a premier policy research and strategic development think tank.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

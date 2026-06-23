@@ -1,0 +1,111 @@
+/* 
+ * StratSearch Foundation, Inc. (SSFI)
+ * Standalone Static Site Custom Stylesheet
+ * Pre-configured for print compatibility and premium corporate typography
+ */
+
+/* Custom global rules */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #F8F7F2;
+  color: #1F2933;
+}
+
+/* Custom Hide Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom Highlight helper for Scroll active section indicators */
+.nav-active {
+  color: #C7A45D !important;
+  border-bottom: 2px solid #C7A45D;
+}
+
+/* Smooth Entrance Micro-Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Custom Focus Field border transition */
+.input-focus-accent:focus {
+  border-color: #C7A45D !important;
+  box-shadow: 0 0 0 1px #C7A45D !important;
+}
+
+/* PRINT MEDIA CONFIGURATION
+ * Optimizes the publications list and details so they print in a beautiful, scholastic format.
+ */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Disable layout noise & screen widgets */
+  header, 
+  footer, 
+  #contact, 
+  #events,
+  #credibility-strip,
+  .no-print, 
+  button, 
+  input, 
+  #category-tabs {
+    display: none !important;
+  }
+  
+  /* Reset document main structural margins */
+  #publications {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Academic Book layout formatting */
+  .pub-card {
+    page-break-inside: avoid;
+    border: none !important;
+    border-bottom: 1px solid #E5E7EB !important;
+    margin-bottom: 2rem !important;
+    padding-bottom: 1.5rem !important;
+    background-color: white !important;
+    box-shadow: none !important;
+  }
+  
+  .pub-card h3 {
+    font-size: 14pt !important;
+    font-family: Georgia, Garamond, serif !important;
+    color: #0B1F3A !important;
+    font-weight: bold !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .pub-card p {
+    font-size: 10pt !important;
+    color: #1F2933 !important;
+  }
+  
+  .pub-card .pub-meta {
+    font-family: inherit !important;
+    font-size: 9pt !important;
+    color: #64748B !important;
+    font-weight: bold !important;
+  }
+}
