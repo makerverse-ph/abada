@@ -94,9 +94,6 @@ export default function App() {
     message: ''
   });
 
-  // Developer overlay state (to explain that static code resides in the static-site folder)
-  const [devOverlayOpen, setDevOverlayOpen] = useState(false);
-
   // Monitor scroll height
   useEffect(() => {
     const handleScroll = () => {
@@ -395,22 +392,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#F8F7F2] font-sans antialiased text-[#1F2933]">
-      
-      {/* DEVELOPER NOTICE BANNER */}
-      <div className="bg-[#0B1F3A] border-b border-[#C7A45D]/30 text-[#F8F7F2] py-2 px-4 text-xs z-50 relative flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-2 max-w-4xl mx-auto w-full justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#C7A45D] animate-pulse"></span>
-            <span><strong>System Notice:</strong> Active React Environment is serving this live staging preview.</span>
-          </div>
-          <button 
-            onClick={() => setDevOverlayOpen(true)}
-            className="flex items-center gap-1.5 bg-[#C7A45D]/20 hover:bg-[#C7A45D]/40 text-[#C7A45D] px-2.5 py-0.5 rounded border border-[#C7A45D]/40 transition text-xxs font-semibold cursor-pointer whitespace-nowrap"
-          >
-            <Info className="w-3.5 h-3.5" /> View Static Deployment Instructions
-          </button>
-        </div>
-      </div>
 
       {/* HEADER / NAVIGATION */}
       <header className={`sticky top-0 z-40 transition-all duration-300 w-full ${
@@ -1784,90 +1765,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* STATIC DEPLOYMENT INFORMATION DEVELOPER DIRECTIVE OVERLAY */}
-      <AnimatePresence>
-        {devOverlayOpen && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setDevOverlayOpen(false)}
-              className="fixed inset-0 bg-black/75 z-50 pointer-events-auto"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="fixed inset-x-4 top-10 sm:top-1/2 sm:-translate-y-1/2 sm:max-w-2xl mx-auto bg-white border border-[#E5E7EB] z-50 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-4 overflow-y-auto max-h-[85vh] pointer-events-auto"
-            >
-              <div className="flex items-center justify-between border-b pb-4">
-                <div className="flex items-center gap-2 text-[#0B1F3A]">
-                  <Building className="w-5 h-5 text-[#C7A45D]" />
-                  <h3 className="font-serif font-bold text-base">Static GitHub Pages Codebase Assets</h3>
-                </div>
-                <button 
-                  onClick={() => setDevOverlayOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B]"
-                  id="dev-overlay-close"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="text-xs text-[#1F2933] overflow-y-auto pr-1 flex flex-col gap-4 leading-relaxed font-light">
-                <p>
-                  As explicitly requested in your strategic guidelines, we have built a **completely self-contained vanilla static distribution codebase** designed to run on GitHub Pages without requiring any compiler, server packages, build actions, or complex terminal setups.
-                </p>
-
-                <div className="p-4 bg-[#F8F7F2] border border-[#E5E7EB] rounded-lg">
-                  <h4 className="font-semibold text-slate-800 text-xs mb-2">📦 Static Code Location:</h4>
-                  <p className="text-[11px] text-[#64748B] mb-2">
-                    The standalone vanilla files containing high-integrity code, precise styles, and client actions reside in the following folder within this workspace:
-                  </p>
-                  <ul className="list-disc pl-5 text-[11px] font-mono text-[#0B1F3A] space-y-1">
-                    <li>📁 /static-site/index.html</li>
-                    <li>📁 /static-site/styles.css</li>
-                    <li>📁 /static-site/script.js</li>
-                    <li>📁 /static-site/README.md</li>
-                  </ul>
-                </div>
-
-                <h4 className="font-bold text-slate-800 text-xs mt-2 border-b pb-1">🚀 Quick Upload Steps:</h4>
-                <ol className="list-decimal pl-5 space-y-2 text-slate-700 font-light text-[11px]">
-                  <li>
-                    <strong className="text-slate-800 font-semibold">Copy files:</strong> Copy the files from the <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-xs">/static-site/</code> directory in this workspace.
-                  </li>
-                  <li>
-                    <strong className="text-slate-800 font-semibold">Create GitHub Repo:</strong> Log into GitHub, create a repository named <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-xs">stratsearch</code>.
-                  </li>
-                  <li>
-                    <strong className="text-slate-800 font-semibold">Commit and Upload:</strong> Push the copied files directly to the root of your primary branch.
-                  </li>
-                  <li>
-                    <strong className="text-slate-800 font-semibold">Enable GitHub Pages:</strong> Go to Repository Settings → Pages. Set Source division to "Deploy from a branch", pick your primary branch (e.g. main), root folder, and select Save.
-                  </li>
-                </ol>
-
-                <div className="p-3 bg-blue-50 text-[#12355B] rounded border border-blue-100 text-[11px]">
-                  ℹ️ Both the live React compiler and the standalone vanilla static assets are kept fully in-sync and compiled perfectly on all checks.
-                </div>
-              </div>
-
-              <div className="pt-4 border-t mt-2 flex justify-end">
-                <button
-                  onClick={() => setDevOverlayOpen(false)}
-                  className="bg-[#0B1F3A] text-white hover:bg-[#12355B] font-bold px-5 py-2 rounded text-xs uppercase tracking-wider transition cursor-pointer"
-                >
-                  I Understand, Return to Live Site
-                </button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
     </div>
   );
 }
-
