@@ -86,7 +86,6 @@ export default function App() {
   
   // Contact form submission state
   const [contactSubmitted, setContactSubmitted] = useState(false);
-  const [contactLoading, setContactLoading] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -355,12 +354,23 @@ export default function App() {
   // Handle contact form submission
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setContactLoading(true);
-    setTimeout(() => {
-      setContactLoading(false);
-      setContactSubmitted(true);
-      setContactForm({ name: '', email: '', subject: '', message: '' });
-    }, 1200);
+
+    const emailBody = [
+      `Name / Title: ${contactForm.name}`,
+      `Institutional Email: ${contactForm.email}`,
+      `Strategic Subject: ${contactForm.subject}`,
+      '',
+      'Correspondence Content:',
+      contactForm.message,
+      '',
+      '---',
+      'Sent from the StratSearch Foundation website contact form.'
+    ].join('\n');
+
+    const mailtoUrl = `mailto:ssfiphil@gmail.com?subject=${encodeURIComponent(contactForm.subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoUrl;
+    setContactSubmitted(true);
+    setContactForm({ name: '', email: '', subject: '', message: '' });
   };
 
   // Handle publication request form submission
@@ -1426,16 +1436,16 @@ export default function App() {
                 <div className="bg-emerald-50 border border-emerald-200 p-6 rounded-xl flex flex-col items-center text-center gap-4 animate-fade-in">
                   <CheckCircle className="w-12 h-12 text-emerald-600" />
                   <div>
-                    <h4 className="font-serif text-lg font-bold text-emerald-900">Correspondence Logged</h4>
+                    <h4 className="font-serif text-lg font-bold text-emerald-900">Email Draft Prepared</h4>
                     <p className="text-xs text-emerald-700 mt-1 leading-relaxed max-w-md">
-                      Your institutional transmission was filed in our Central Secretariat. A response will be coordinated via the registered email within 2 normal operation days.
+                      Your default email app should open with the recipient, subject, and message already filled. Review the draft and send it from your email app to complete the transmission.
                     </p>
                   </div>
                   <button 
                     onClick={() => setContactSubmitted(false)}
                     className="text-xs text-[#0B1F3A] hover:text-[#C7A45D] font-mono font-bold underline focus:outline-none"
                   >
-                    Transmit another request
+                    Compose another communication
                   </button>
                 </div>
               ) : (
@@ -1498,25 +1508,15 @@ export default function App() {
                   </div>
 
                   <div className="text-[11px] font-normal leading-normal text-[#64748B] bg-[#F8F7F2] p-3.5 rounded-lg border border-[#E5E7EB]">
-                    🔒 <strong>Privacy Covenant:</strong> StratSearch Foundation complies with secure document routing policies. Information inputted will solely map to the CENTRAL secretarial logs, never sold or routed to external entities.
+                    <strong>Privacy Notice:</strong> Submitting this form opens your device's default email app with the entered details pre-filled. No information is sent until you send the email from that app.
                   </div>
 
                   <button
                     id="submit-contact"
                     type="submit"
-                    disabled={contactLoading}
-                    className="flex items-center justify-center gap-2 bg-[#0B1F3A] hover:bg-[#12355B] text-white font-bold py-3 px-5 rounded-lg text-xs uppercase tracking-wider transition-all cursor-pointer shadow disabled:opacity-50"
+                    className="flex items-center justify-center gap-2 bg-[#0B1F3A] hover:bg-[#12355B] text-white font-bold py-3 px-5 rounded-lg text-xs uppercase tracking-wider transition-all cursor-pointer shadow"
                   >
-                    {contactLoading ? (
-                      <>
-                        <span className="w-4 h-4 rounded-full border-2 border-slate-300 border-t-white animate-spin"></span>
-                        Transmitting...
-                      </>
-                    ) : (
-                      <>
-                        File Official Communication <Send className="w-3.5 h-3.5 text-[#C7A45D]" />
-                      </>
-                    )}
+                    File Official Communication <Send className="w-3.5 h-3.5 text-[#C7A45D]" />
                   </button>
                 </form>
               )}
