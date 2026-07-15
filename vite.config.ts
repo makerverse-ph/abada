@@ -51,7 +51,9 @@ export default defineConfig(({mode}) => {
   }
 
   return {
-    base: '/',
+    // Relative asset URLs work on both GitHub project Pages (/abada/)
+    // and the production custom domain root without a rebuild-time toggle.
+    base: './',
     plugins: [
       react(),
       tailwindcss(),

@@ -14,7 +14,7 @@ const redirects = new Map([
 ]);
 
 for (const [legacyPath, fragment] of redirects) {
-  const target = `${origin}/${fragment}`;
+  const target = `../${fragment}`;
   const directory = resolve('dist', legacyPath);
   const html = `<!doctype html>
 <html lang="en">

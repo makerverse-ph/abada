@@ -31,7 +31,7 @@ Production origin: `https://stratsearch.org/`
 
 - Added build-time React prerendering. `dist/index.html` now contains the existing page content, one `h1`, all existing sections, publication cards, forms, and crawlable anchors before JavaScript runs.
 - Changed the client entry to hydrate prerendered markup while retaining the existing interactive behavior.
-- Set the production Vite base to `/`.
+- Set Vite to relative asset URLs so the same artifact works on GitHub project Pages (`/abada/`) and the custom-domain root.
 
 ### Metadata and structured data
 

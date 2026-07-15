@@ -1022,7 +1022,7 @@ export default function App() {
                 {/* Academic Profile Picture */}
                 <div className="w-20 h-20 rounded-full border-2 border-[#C7A45D] overflow-hidden bg-[#0B1F3A] flex items-center justify-center relative shadow-md group-hover:scale-105 transition-transform shrink-0">
                   <img
-                    src="/assets/clarita-carlos.jpg"
+                    src="assets/clarita-carlos.jpg"
                     alt="Dr. Clarita R. Carlos"
                     width={225}
                     height={227}
@@ -1067,7 +1067,7 @@ export default function App() {
                 {/* Profile Picture */}
                 <div className="w-20 h-20 rounded-full border-2 border-[#C7A45D] overflow-hidden bg-[#12355B] flex items-center justify-center relative shadow-md group-hover:scale-105 transition-transform shrink-0">
                   <img
-                    src="/assets/dennis-lalata.jpg"
+                    src="assets/dennis-lalata.jpg"
                     alt="Dennis M. Lalata"
                     width={266}
                     height={300}

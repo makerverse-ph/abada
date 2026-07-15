@@ -9,7 +9,7 @@
    - Page source contains the primary `h1`, body content, canonical, robots directive, social metadata, and JSON-LD.
    - `/robots.txt` and `/sitemap.xml` return `200` with the expected production URLs.
    - A legacy URL such as `/mission/` reaches `/#mission`.
-   - CSS and JavaScript load from `/assets/`, not `/abada/assets/`.
+   - CSS, JavaScript, and portraits load from the active site's `assets/` directory (`/abada/assets/` on project Pages or `/assets/` on the custom domain).
 4. Check both apex and `www` hostnames. The non-canonical hostname must redirect to `https://stratsearch.org/` through GitHub Pages/DNS configuration.
 
 ## Google Search Console

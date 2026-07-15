@@ -140,12 +140,21 @@ for (const route of indexableRoutes) {
     }
   }
 
-  for (const match of html.matchAll(/<(?:script|link)\b[^>]*>/gi)) {
+  for (const match of html.matchAll(/<(?:script|link|img)\b[^>]*>/gi)) {
     const attrs = attributes(match[0]);
     const resource = attrs.src || attrs.href;
-    if (!resource?.startsWith('/') || resource.startsWith('//')) continue;
+    if (
+      !resource ||
+      resource.startsWith('//') ||
+      /^(?:https?:|data:|mailto:|tel:|#)/i.test(resource)
+    ) {
+      continue;
+    }
 
-    const resourcePath = resource.split(/[?#]/, 1)[0].replace(/^\//, '');
+    const resourcePath = resource
+      .split(/[?#]/, 1)[0]
+      .replace(/^\.\//, '')
+      .replace(/^\//, '');
     try {
       await access(resolve('dist', resourcePath));
     } catch {
