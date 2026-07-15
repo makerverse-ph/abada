@@ -1598,9 +1598,9 @@ export default function App() {
           {/* Col 1 Wordmark description - 5 cols */}
           <div className="md:col-span-5 flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded bg-[#FFFFFF]/10 border border-[#C7A45D] flex items-center justify-center text-[#C7A45D] font-serif font-bold text-xs">
+              {/* <div className="w-8 h-8 rounded bg-[#FFFFFF]/10 border border-[#C7A45D] flex items-center justify-center text-[#C7A45D] font-serif font-bold text-xs">
                 SS
-              </div>
+              </div> */}
               <span className="font-serif text-white font-semibold text-base tracking-wide uppercase text-sm">
                 StratSearch Foundation, Inc.
               </span>
