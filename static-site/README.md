@@ -93,6 +93,6 @@ To append articles:
 ---
 
 ## 🔒 Security and Privacy Safeguards
-- **Zero Tracker Scripts**: The site has no third-party trackers, keeping data collection zero.
+- **Production Analytics**: The production domain loads the configured Google Analytics tag; local copies do not load it.
 - **Form Protection**: Communications forms use client-side logging triggers without databases to comply with government privacy guidelines.
 - **Secure CDN Use**: All links load from verified secure CDNs (Tailwind CDN, Lucide, and Google Fonts) with HTTPS encryption.

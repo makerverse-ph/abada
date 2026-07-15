@@ -367,10 +367,32 @@ export default function App() {
       'Sent from the StratSearch Foundation website contact form.'
     ].join('\n');
 
-    const mailtoUrl = `mailto:ssfiphil@gmail.com?subject=${encodeURIComponent(contactForm.subject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoUrl = `mailto:stratsearchfoundation@gmail.com?subject=${encodeURIComponent(contactForm.subject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailtoUrl;
     setContactSubmitted(true);
     setContactForm({ name: '', email: '', subject: '', message: '' });
+  };
+
+  // Open the client's default email app for forthcoming publication notifications
+  const handlePressNotification = (publication: Publication) => {
+    const subject = `Notification Request: ${publication.title}`;
+    const emailBody = [
+      'Hello SSFI Secretariat,',
+      '',
+      'Please notify me when the following publication becomes available:',
+      '',
+      `Title: ${publication.title}`,
+      `Author/Convener: ${publication.author}`,
+      `Reference ID: SSFI-${publication.id.toUpperCase()}`,
+      '',
+      'Thank you.',
+      '',
+      '---',
+      'Sent from the StratSearch Foundation website.'
+    ].join('\n');
+
+    const mailtoUrl = `mailto:stratsearchfoundation@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoUrl;
   };
 
   // Handle publication request form submission
@@ -403,6 +425,13 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#F8F7F2] font-sans antialiased text-[#1F2933]">
 
+      <a
+        href="#main-content"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded bg-white px-4 py-2 text-sm font-bold text-[#0B1F3A] shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[#C7A45D]"
+      >
+        Skip to main content
+      </a>
+
       {/* HEADER / NAVIGATION */}
       <header className={`sticky top-0 z-40 transition-all duration-300 w-full ${
         scrolled 
@@ -413,11 +442,7 @@ export default function App() {
           
           {/* Logo / Wordmark */}
           <a href="#home" id="nav-brand-logo" onClick={(e) => navigateTo(e, 'home')} className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#C7A45D] rounded p-1">
-            <div className="relative flex items-center justify-center w-10 h-10 bg-[#FFFFFF]/10 border border-[#C7A45D]/60 rounded-lg group-hover:bg-[#C7A45D]/20 transition-all duration-300">
-              <span className="font-serif font-bold text-base text-[#C7A45D] tracking-wider">SS</span>
-              {/* Gold decorative dot */}
-              <span className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#C7A45D] rounded-full"></span>
-            </div>
+
             <div className="flex flex-col">
               <span className="font-serif font-semibold text-[#FFFFFF] tracking-wide text-sm sm:text-base leading-tight group-hover:text-[#C7A45D] transition-colors">
                 StratSearch Foundation
@@ -429,7 +454,7 @@ export default function App() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav aria-label="Primary navigation" className="hidden lg:flex items-center gap-1 xl:gap-2">
             {[
               { id: 'about', label: 'About' },
               { id: 'mission', label: 'Mission' },
@@ -464,10 +489,13 @@ export default function App() {
 
           {/* Mobile hamburger button */}
           <button
+            type="button"
             id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-white/80 hover:text-white hover:bg-white/5 rounded focus:outline-none focus:ring-2 focus:ring-[#C7A45D]"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -486,6 +514,7 @@ export default function App() {
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
               className="fixed inset-0 bg-black/60 z-30 lg:hidden"
+              aria-hidden="true"
             />
             {/* Drawer Body */}
             <motion.div
@@ -494,24 +523,27 @@ export default function App() {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 bottom-0 w-80 bg-[#0B1F3A] z-40 lg:hidden p-6 shadow-2xl flex flex-col border-l border-[#C7A45D]/20"
+              id="mobile-navigation"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
             >
               <div className="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-white/10 border border-[#C7A45D] rounded flex items-center justify-center">
-                    <span className="font-serif font-bold text-xs text-[#C7A45D]">SS</span>
-                  </div>
                   <span className="font-serif font-semibold text-white tracking-wide text-sm">SSFI Secretariat</span>
                 </div>
                 <button 
+                  type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-1 rounded-full bg-white/5 hover:bg-white/10 text-white/80 focus:outline-[#C7A45D]"
                   id="mobile-menu-close"
+                  aria-label="Close navigation menu"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1 overflow-y-auto flex-grow pr-1">
+              <nav aria-label="Mobile navigation links" className="flex flex-col gap-1 overflow-y-auto flex-grow pr-1">
                 {[
                   { id: 'about', label: 'About Think Tank' },
                   { id: 'mission', label: 'Mission & Vision' },
@@ -536,15 +568,15 @@ export default function App() {
                     {item.label}
                   </a>
                 ))}
-              </div>
+              </nav>
 
               <div className="pt-6 border-t border-white/10 mt-6 text-center">
                 <p className="text-white/40 text-[10px] uppercase font-mono tracking-widest mb-3">Institutional Secretariat</p>
-                <a 
-                  href="mailto:ssfiphil@gmail.com" 
+                <a
+                  href="mailto:stratsearchfoundation@gmail.com"
                   className="flex items-center justify-center gap-2 py-2.5 px-4 bg-[#C7A45D] text-[#0B1F3A] hover:bg-yellow-500 rounded text-xs font-bold uppercase tracking-wider transition-colors duration-200"
                 >
-                  <Mail className="w-4 h-4" /> ssfiphil@gmail.com
+                  <Mail className="w-4 h-4" /> stratsearchfoundation@gmail.com
                 </a>
               </div>
             </motion.div>
@@ -552,6 +584,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      <main id="main-content">
       {/* HERO SECTION */}
       <section id="home" className="relative min-h-[90vh] lg:min-h-screen bg-[#0B1F3A] overflow-hidden flex items-center py-20 px-4 sm:px-6 lg:px-8">
         
@@ -668,7 +701,7 @@ export default function App() {
               <div className="absolute bottom-6 left-6 right-6 bg-[#0B1F3A]/90 border border-[#C7A45D]/30 shadow-2xl p-4 rounded-lg flex items-center gap-3">
                 <Building className="w-8 h-8 text-[#C7A45D] shrink-0" />
                 <div>
-                  <h4 className="text-[11px] font-mono tracking-widest text-[#C7A45D] uppercase font-bold">SEC Standard Legacy</h4>
+                  <p className="text-[11px] font-mono tracking-widest text-[#C7A45D] uppercase font-bold">SEC Standard Legacy</p>
                   <p className="text-white text-xs font-light leading-relaxed">Continuous policymaking contribution in Asia-Pacific since 1993.</p>
                 </div>
               </div>
@@ -986,10 +1019,17 @@ export default function App() {
             <div className="md:col-span-6 border border-[#E5E7EB] hover:border-[#C7A45D]/30 p-6 sm:p-10 rounded-2xl bg-[#F8F7F2]/40 hover:shadow-lg transition-all duration-300 flex flex-col gap-6 group" id="leader-card-carlos">
               
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-[#E5E7EB]">
-                {/* Academic Profile Picture Placeholder */}
+                {/* Academic Profile Picture */}
                 <div className="w-20 h-20 rounded-full border-2 border-[#C7A45D] overflow-hidden bg-[#0B1F3A] flex items-center justify-center relative shadow-md group-hover:scale-105 transition-transform shrink-0">
-                  {/* Styled academic illustration */}
-                  <span className="font-serif font-bold text-white text-3xl">CC</span>
+                  <img
+                    src="/assets/clarita-carlos.jpg"
+                    alt="Dr. Clarita R. Carlos"
+                    width={225}
+                    height={227}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
                   {/* Golden overlay tag */}
                   <div className="absolute bottom-0 inset-x-0 bg-[#C7A45D] text-[9px] text-[#0B1F3A] py-0.5 uppercase tracking-widest font-mono text-center font-bold">ED</div>
                 </div>
@@ -1024,9 +1064,17 @@ export default function App() {
             <div className="md:col-span-6 border border-[#E5E7EB] hover:border-[#C7A45D]/30 p-6 sm:p-10 rounded-2xl bg-[#F8F7F2]/40 hover:shadow-lg transition-all duration-300 flex flex-col gap-6 group" id="leader-card-lalata">
               
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-[#E5E7EB]">
-                {/* Profile Placeholder */}
+                {/* Profile Picture */}
                 <div className="w-20 h-20 rounded-full border-2 border-[#C7A45D] overflow-hidden bg-[#12355B] flex items-center justify-center relative shadow-md group-hover:scale-105 transition-transform shrink-0">
-                  <span className="font-serif font-bold text-white text-3xl">DL</span>
+                  <img
+                    src="/assets/dennis-lalata.jpg"
+                    alt="Dennis M. Lalata"
+                    width={266}
+                    height={300}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
                   {/* Golden tag */}
                   <div className="absolute bottom-0 inset-x-0 bg-[#C7A45D] text-[9px] text-[#0B1F3A] py-0.5 uppercase tracking-widest font-mono text-center font-bold">PM</div>
                 </div>
@@ -1212,7 +1260,13 @@ export default function App() {
                         Identifier: SSFI-{pub.id.toUpperCase()}
                       </span>
                       <button 
-                        onClick={() => setSelectedPaper(pub)}
+                        onClick={() => {
+                          if (pub.status === 'In Press') {
+                            handlePressNotification(pub);
+                          } else {
+                            setSelectedPaper(pub);
+                          }
+                        }}
                         id={`request-btn-${pub.id}`}
                         className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded transition ${
                           pub.status === 'In Press'
@@ -1305,26 +1359,26 @@ export default function App() {
                 </div>
 
                 <div className="border-t border-[#E5E7EB] pt-6 flex flex-col gap-4">
-                  <div className="p-4 bg-white rounded-lg border border-[#E5E7EB] flex items-center gap-4">
+                  {/* <div className="p-4 bg-white rounded-lg border border-[#E5E7EB] flex items-center gap-4">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span>
                     <div>
                       <h5 className="text-xs font-semibold text-[#0B1F3A]">Roundtable: Child Domestic Labor Safeguard Guidelines</h5>
                       <p className="text-[10px] text-[#64748B]">To be announced formally inside general press releases.</p>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="p-4 bg-white rounded-lg border border-[#E5E7EB] flex items-center gap-4">
+                  {/* <div className="p-4 bg-white rounded-lg border border-[#E5E7EB] flex items-center gap-4">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span>
                     <div>
                       <h5 className="text-xs font-semibold text-[#0B1F3A]">Symposium: Disaster Risk Adaptations in Municipal Arenas</h5>
                       <p className="text-[10px] text-[#64748B]">Schedule and keynote panelists forthcoming.</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
               <div className="mt-8 border-t border-[#E5E7EB] pt-4 text-xxs font-mono text-center text-[#64748B]">
-                🚨 Inquiries and invitations will be published via ssfiphil@gmail.com
+                🚨 Inquiries and invitations will be published via stratsearchfoundation@gmail.com
               </div>
 
             </div>
@@ -1378,7 +1432,7 @@ export default function App() {
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-white">Electronic Mail</h4>
                     <p className="text-sm text-amber-50 font-semibold leading-relaxed mt-1">
-                      ssfiphil@gmail.com
+                      stratsearchfoundation@gmail.com
                     </p>
                     <span className="text-[10px] text-[#64748B] font-mono mt-1 block">Response within 48 operations hours.</span>
                   </div>
@@ -1396,7 +1450,13 @@ export default function App() {
                   <span className="text-xxs font-mono text-[#64748B]">Sikatuna District Bounds</span>
                 </div>
                 {/* Abstract visual coordinate representation of Quezon City */}
-                <div className="h-44 bg-[#F8F7F2] rounded-lg border border-slate-200 relative overflow-hidden flex flex-col items-center justify-center text-center p-4">
+                <a
+                  href="https://maps.app.goo.gl/pHi4zNngaQpEoq859"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View the StratSearch Foundation office location on Google Maps"
+                  className="h-44 bg-[#F8F7F2] rounded-lg border border-slate-200 relative overflow-hidden flex flex-col items-center justify-center text-center p-4 group"
+                >
                   {/* Styled geographical grids */}
                   <div className="absolute inset-x-0 top-1/4 h-px bg-[#0B1F3A]/5"></div>
                   <div className="absolute inset-x-0 top-2/4 h-px bg-[#0B1F3A]/5"></div>
@@ -1406,7 +1466,7 @@ export default function App() {
                   <div className="absolute inset-y-0 left-3/4 w-px bg-[#0B1F3A]/5"></div>
                   
                   {/* Concentric location marker */}
-                  <div className="relative z-10 w-10 h-10 rounded-full bg-[#0B1F3A]/10 border border-[#C7A45D] flex items-center justify-center shadow-lg transform hover:scale-110 transition">
+                  <div className="relative z-10 w-10 h-10 rounded-full bg-[#0B1F3A]/10 border border-[#C7A45D] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
                     <MapPin className="w-5 h-5 text-[#C7A45D]" />
                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white animate-ping"></span>
                   </div>
@@ -1415,12 +1475,14 @@ export default function App() {
                   <p className="text-[10px] text-[#64748B] max-w-xs leading-relaxed mt-1 z-10">
                     Proximity parameters: Neighboring University of the Philippines Diliman and central governmental agency offices.
                   </p>
-                </div>
+                </a>
                 <a 
-                  href="mailto:ssfiphil@gmail.com" 
+                  href="https://maps.app.goo.gl/pHi4zNngaQpEoq859"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-center font-bold text-xs text-[#0B1F3A] hover:text-[#C7A45D] transition block mt-1"
                 >
-                  ✉ Direct Email: ssfiphil@gmail.com
+                  View location on Google Maps ↗
                 </a>
               </div>
 
@@ -1527,6 +1589,7 @@ export default function App() {
 
         </div>
       </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="bg-[#0B1F3A] text-[#64748B] border-t border-[#C7A45D]/10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
@@ -1552,9 +1615,9 @@ export default function App() {
 
           {/* Col 2 Quick navigation - 3 cols */}
           <div className="md:col-span-3 flex flex-col gap-4">
-            <h4 className="text-xs uppercase tracking-widest font-mono text-white/90 font-bold border-b border-white/5 pb-2">
+            <h2 className="text-xs uppercase tracking-widest font-mono text-white/90 font-bold border-b border-white/5 pb-2">
               Central Navigation
-            </h4>
+            </h2>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <a href="#about" onClick={(e) => navigateTo(e, 'about')} id="footer-link-about" className="hover:text-white transition">About SSFI</a>
               <a href="#mission" onClick={(e) => navigateTo(e, 'mission')} id="footer-link-mission" className="hover:text-white transition">Core Mission</a>
@@ -1569,9 +1632,9 @@ export default function App() {
 
           {/* Col 3 Contact info recap - 4 cols */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            <h4 className="text-xs uppercase tracking-widest font-mono text-white/90 font-bold border-b border-white/5 pb-2">
+            <h2 className="text-xs uppercase tracking-widest font-mono text-white/90 font-bold border-b border-white/5 pb-2">
               Primary Communications
-            </h4>
+            </h2>
             <div className="flex flex-col gap-2 text-xs">
               <div className="flex gap-2">
                 <MapPin className="w-4 h-4 text-[#C7A45D] shrink-0" />
@@ -1579,7 +1642,7 @@ export default function App() {
               </div>
               <div className="flex gap-2 items-center mt-1">
                 <Mail className="w-4 h-4 text-[#C7A45D] shrink-0" />
-                <a href="mailto:ssfiphil@gmail.com" className="hover:text-white underline transition">ssfiphil@gmail.com</a>
+                <a href="mailto:stratsearchfoundation@gmail.com" className="hover:text-white underline transition">stratsearchfoundation@gmail.com</a>
               </div>
             </div>
             
@@ -1608,12 +1671,14 @@ export default function App() {
       <AnimatePresence>
         {showBackToTop && (
           <motion.button
+            type="button"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="fixed bottom-6 right-6 z-30 p-3 bg-[#0B1F3A] hover:bg-[#12355B] text-white border border-[#C7A45D]/50 hover:border-[#C7A45D] rounded-full shadow-lg transition cursor-pointer"
             id="back-to-top"
+            aria-label="Back to top"
           >
             <ChevronUp className="w-5 h-5 text-[#C7A45D]" />
           </motion.button>
@@ -1631,6 +1696,7 @@ export default function App() {
               exit={{ opacity: 0 }}
               onClick={() => setSelectedPaper(null)}
               className="fixed inset-0 bg-black/60 z-50 pointer-events-auto"
+              aria-hidden="true"
             />
             {/* Modal Box */}
             <motion.div 
@@ -1638,6 +1704,9 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="fixed inset-x-4 top-10 sm:top-1/2 sm:-translate-y-1/2 sm:max-w-xl mx-auto bg-white border border-[#E5E7EB] z-50 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 pointer-events-auto overflow-y-auto max-h-[85vh] no-scrollbar"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="request-modal-title"
             >
               
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -1646,14 +1715,16 @@ export default function App() {
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-[#0B1F3A] text-sm sm:text-base leading-tight">Educational File Dispatch Portal</h3>
+                    <h3 id="request-modal-title" className="font-serif font-bold text-[#0B1F3A] text-sm sm:text-base leading-tight">Educational File Dispatch Portal</h3>
                     <span className="text-[10px] font-mono text-[#64748B] block mt-0.5">Reference ID: SSFI-{selectedPaper.id.toUpperCase()}</span>
                   </div>
                 </div>
                 <button 
+                  type="button"
                   onClick={() => setSelectedPaper(null)}
                   className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B] transition focus:outline-none"
                   id="modal-close"
+                  aria-label="Close publication request"
                 >
                   <X className="w-5 h-5" />
                 </button>

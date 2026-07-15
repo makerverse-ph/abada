@@ -3,25 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google tag (gtag.js): production domain only -->
+  <script>
+    if (window.location.hostname === 'stratsearch.org') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){window.dataLayer.push(arguments);};
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-036PVEWZS5');
+
+      const googleTag = document.createElement('script');
+      googleTag.async = true;
+      googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=G-036PVEWZS5';
+      googleTag.dataset.gaMeasurementId = 'G-036PVEWZS5';
+      document.head.appendChild(googleTag);
+    }
+  </script>
   
   <!-- SEO Meta Tags -->
   <title>StratSearch Foundation, Inc. | Evidence-Based Policy Research</title>
   <meta name="description" content="StratSearch Foundation, Inc. (SSFI) is a Philippine policy research and strategic development think tank championing science, evidence, and strategic insight in public decision-making.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="keywords" content="StratSearch Foundation, SSFI, policy research, think tank Philippines, Clarita Carlos, evidence-based policy, electoral reform Philippines, disaster management, ASEAN studies">
   <meta name="author" content="StratSearch Foundation, Inc.">
+  <link rel="canonical" href="https://stratsearch.org/">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stratsearch.org/">
   <meta property="og:title" content="StratSearch Foundation, Inc. | Evidence-Based Policy Research">
   <meta property="og:description" content="A premier policy think tank championing science, evidence, and strategic insights in Philippine administrative, regional, and national decision-making.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop">
+  <meta property="og:site_name" content="StratSearch Foundation, Inc.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&h=630&fit=crop">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="StratSearch Foundation, Inc. policy research and strategic development">
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://stratsearch.org/">
-  <meta property="twitter:title" content="StratSearch Foundation, Inc. | Evidence-Based Policy Research">
-  <meta property="twitter:description" content="A premier policy think tank championing science, evidence, and strategic insights in Philippine administrative, regional, and national decision-making.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StratSearch Foundation, Inc. | Evidence-Based Policy Research">
+  <meta name="twitter:description" content="A premier policy think tank championing science, evidence, and strategic insights in Philippine administrative, regional, and national decision-making.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&h=630&fit=crop">
+  <meta name="twitter:image:alt" content="StratSearch Foundation, Inc. policy research and strategic development">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,7 +140,7 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "ssfiphil@gmail.com",
+        "email": "stratsearchfoundation@gmail.com",
         "contactType": "Secretariat Office"
       },
       "description": "StratSearch Foundation, Inc. is a Philippine policy research and strategic development think tank championing science, evidence, and strategic insight in policymaking.",
@@ -153,10 +176,7 @@
       
       <!-- Brand Logo Wordmark -->
       <a href="#home" class="flex items-center gap-3 group focus:outline-none">
-        <div class="relative flex items-center justify-center w-10 h-10 bg-white/10 border border-accentGold/60 rounded-lg group-hover:bg-accentGold/20 transition-all duration-300">
-          <span class="font-serif font-bold text-base text-accentGold tracking-wider">SS</span>
-          <span class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-accentGold rounded-full"></span>
-        </div>
+
         <div class="flex flex-col">
           <span class="font-serif font-semibold text-white tracking-wide text-sm sm:text-base leading-tight">
             StratSearch Foundation
@@ -192,13 +212,10 @@
 
   <!-- MOBILE NAVIGATION DRAWER -->
   <div id="mobile-drawer" class="fixed inset-y-0 right-0 w-80 bg-primaryNavy z-50 p-6 shadow-2xl flex-col border-l border-accentGold/20 transform translate-x-full transition-transform duration-300 ease-in-out hidden no-print">
-    <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-white/10 border border-accentGold rounded flex items-center justify-center">
-          <span class="font-serif font-bold text-xs text-accentGold">SS</span>
+      <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+        <div class="flex items-center gap-2">
+          <span class="font-serif font-semibold text-white tracking-wide text-sm">SSFI Secretariat</span>
         </div>
-        <span class="font-serif font-semibold text-white tracking-wide text-sm">SSFI Secretariat</span>
-      </div>
       <button id="close-drawer-btn" class="p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/80">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
@@ -217,8 +234,8 @@
 
     <div class="pt-6 border-t border-white/10 mt-6 text-center">
       <p class="text-white/40 text-[10px] uppercase font-mono tracking-widest mb-3">Institutional Secretariat</p>
-      <a href="mailto:ssfiphil@gmail.com" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-accentGold text-primaryNavy hover:bg-amber-500 rounded text-xs font-bold uppercase tracking-wider transition">
-        <i data-lucide="mail" class="w-4 h-4"></i> ssfiphil@gmail.com
+      <a href="mailto:stratsearchfoundation@gmail.com" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-accentGold text-primaryNavy hover:bg-amber-500 rounded text-xs font-bold uppercase tracking-wider transition">
+        <i data-lucide="mail" class="w-4 h-4"></i> stratsearchfoundation@gmail.com
       </a>
     </div>
   </div>
@@ -569,8 +586,8 @@
         <!-- Dr. Carlos Card -->
         <div class="border border-slate-200 p-6 sm:p-10 rounded-2xl bg-warmBg/40 hover:shadow-lg transition flex flex-col gap-6">
           <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-slate-200">
-            <div class="w-20 h-20 rounded-full border-2 border-accentGold bg-primaryNavy flex items-center justify-center relative shadow-md shrink-0">
-              <span class="font-serif font-bold text-white text-3xl">CC</span>
+            <div class="w-20 h-20 rounded-full border-2 border-accentGold bg-primaryNavy flex items-center justify-center relative shadow-md shrink-0 overflow-hidden">
+              <img src="../assets/clarita-carlos.jpg" alt="Dr. Clarita R. Carlos" width="225" height="227" loading="lazy" decoding="async" class="w-full h-full object-cover">
               <div class="absolute bottom-0 inset-x-0 bg-accentGold text-[9px] text-primaryNavy py-0.5 uppercase tracking-widest font-mono text-center font-bold">ED</div>
             </div>
             <div>
@@ -592,8 +609,8 @@
         <!-- Mr. Lalata Card -->
         <div class="border border-slate-200 p-6 sm:p-10 rounded-2xl bg-warmBg/40 hover:shadow-lg transition flex flex-col gap-6">
           <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-slate-200">
-            <div class="w-20 h-20 rounded-full border-2 border-accentGold bg-secondaryBlue flex items-center justify-center relative shadow-md shrink-0">
-              <span class="font-serif font-bold text-white text-3xl">DL</span>
+            <div class="w-20 h-20 rounded-full border-2 border-accentGold bg-secondaryBlue flex items-center justify-center relative shadow-md shrink-0 overflow-hidden">
+              <img src="../assets/dennis-lalata.jpg" alt="Dennis M. Lalata" width="266" height="300" loading="lazy" decoding="async" class="w-full h-full object-cover">
               <div class="absolute bottom-0 inset-x-0 bg-accentGold text-[9px] text-primaryNavy py-0.5 uppercase tracking-widest font-mono text-center font-bold">PM</div>
             </div>
             <div>
@@ -687,7 +704,7 @@
             </div>
           </div>
 
-          <div class="border-t border-slate-200 pt-6 flex flex-col gap-4 mt-6">
+          <!-- <div class="border-t border-slate-200 pt-6 flex flex-col gap-4 mt-6">
             <div class="p-4 bg-white rounded-lg border border-slate-200 flex items-center gap-4">
               <span class="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span>
               <div>
@@ -695,7 +712,7 @@
                 <p class="text-[10px] text-slate-500">To be announced formally inside general press releases.</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -727,22 +744,25 @@
               <i data-lucide="mail" class="w-6 h-6 text-accentGold shrink-0 mt-0.5"></i>
               <div>
                 <h4 class="text-xs font-bold uppercase tracking-wider text-white">Electronic Mail</h4>
-                <p class="text-sm text-yellow-50 font-semibold leading-relaxed mt-1">ssfiphil@gmail.com</p>
+                <p class="text-sm text-yellow-50 font-semibold leading-relaxed mt-1">stratsearchfoundation@gmail.com</p>
               </div>
             </div>
           </div>
 
           <!-- Quezon City Styled Map Precinct -->
           <div class="border border-slate-200 bg-white rounded-2xl p-5 shadow-sm">
-            <div class="h-44 bg-warmBg rounded-lg border border-slate-200 relative overflow-hidden flex flex-col items-center justify-center text-center p-4">
+            <a href="https://maps.app.goo.gl/pHi4zNngaQpEoq859" target="_blank" rel="noopener noreferrer" aria-label="View the StratSearch Foundation office location on Google Maps" class="h-44 bg-warmBg rounded-lg border border-slate-200 relative overflow-hidden flex flex-col items-center justify-center text-center p-4 group">
               <div class="absolute inset-x-0 top-2/4 h-px bg-primaryNavy/5"></div>
               <div class="absolute inset-y-0 left-2/4 w-px bg-primaryNavy/5"></div>
-              <div class="w-10 h-10 rounded-full bg-primaryNavy/10 border border-[#C7A45D] flex items-center justify-center relative">
+              <div class="w-10 h-10 rounded-full bg-primaryNavy/10 border border-[#C7A45D] flex items-center justify-center relative transition group-hover:scale-110">
                 <i data-lucide="map-pin" class="w-5 h-5 text-[#C7A45D]"></i>
               </div>
               <span class="font-serif font-bold text-xs text-primaryNavy mt-3">Makadios Street Precinct</span>
               <p class="text-[10px] text-slate-500 mt-1 max-w-xs">Neighboring University of the Philippines Diliman and central government departments.</p>
-            </div>
+            </a>
+            <a href="https://maps.app.goo.gl/pHi4zNngaQpEoq859" target="_blank" rel="noopener noreferrer" class="text-center font-bold text-xs text-primaryNavy hover:text-accentGold transition block mt-3">
+              View location on Google Maps ↗
+            </a>
           </div>
         </div>
 
@@ -818,7 +838,7 @@
         <h4 class="text-xs uppercase tracking-widest font-mono text-white/90 font-bold border-b border-white/5 pb-2">Primary Communications</h4>
         <div class="flex flex-col gap-2 text-xs">
           <span class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-accentGold"></i> 12 Makadios St., Sikatuna Village, QC</span>
-          <span class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 text-accentGold"></i> <a href="mailto:ssfiphil@gmail.com" class="hover:text-white underline">ssfiphil@gmail.com</a></span>
+          <span class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 text-accentGold"></i> <a href="mailto:stratsearchfoundation@gmail.com" class="hover:text-white underline">stratsearchfoundation@gmail.com</a></span>
         </div>
       </div>
     </div>

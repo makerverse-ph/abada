@@ -328,7 +328,7 @@ function renderPublicationsGrid() {
             Identifier: SSFI-${pub.id.toUpperCase()}
           </span>
           <button onclick="openRequestModal('${pub.id}')" class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded transition ${actionClass} no-print">
-            ${isPress ? 'Notify' : 'Request'} <i data-lucide="external-link" class="w-3 h-3"></i>
+            ${isPress ? 'Notify on Press' : 'Request'} <i data-lucide="external-link" class="w-3 h-3"></i>
           </button>
         </div>
       </div>
@@ -344,6 +344,27 @@ function renderPublicationsGrid() {
 function openRequestModal(pubId) {
   const pub = publications.find(p => p.id === pubId);
   if (!pub) return;
+
+  if (pub.status === 'In Press') {
+    const subject = `Notification Request: ${pub.title}`;
+    const emailBody = [
+      'Hello SSFI Secretariat,',
+      '',
+      'Please notify me when the following publication becomes available:',
+      '',
+      `Title: ${pub.title}`,
+      `Author/Convener: ${pub.author}`,
+      `Reference ID: SSFI-${pub.id.toUpperCase()}`,
+      '',
+      'Thank you.',
+      '',
+      '---',
+      'Sent from the StratSearch Foundation website.'
+    ].join('\n');
+
+    window.location.href = `mailto:stratsearchfoundation@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    return;
+  }
 
   const modal = document.getElementById('request-modal');
   const mainTitleOutput = document.getElementById('modal-pub-title');
